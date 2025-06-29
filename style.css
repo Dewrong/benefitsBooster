@@ -1,0 +1,50 @@
+h1 {
+    
+  font-family: Arial;
+  size: 2pc;
+}
+
+p{
+    
+  font-family: Arial;
+}
+
+.label{
+    
+  font-family: Arial;
+    padding: .5pc;
+    font-size: 1.5pc;
+}
+select{
+    color: black;
+    size: 1.5pc;
+    font-size: 1.5pc;
+}
+option{
+    color: black;
+    size: 1.5pc;
+    font-size: 1.5pc;
+}
+
+input{
+    
+  font-family: Arial;
+    padding: .3pc;
+    size: 1pc;
+    font-size: 1pc;
+}
+
+/*the container must be positioned relative:*/
+.custom-select {
+  padding: 0.5pc;
+  position: relative;
+  font-family: Arial;
+  width: 13pc;
+}
+
+button{
+    size: 1pc;
+    font-size: 2pc;
+    color: white;
+    background-color: red;
+}
