@@ -4,22 +4,7 @@ Current scope is the census information to document functionality.
 This will be replicated only on-screen for now to ensure math and information is correct and create a working model.
 This work is completed by James Burdine.
 */
-import * as pdfMake from "./lib/pdfmake.min.js";
 
-// var font = {
-//   Courier: {
-//     normal: 'Courier',
-//     bold: 'Courier-Bold',
-//     italics: 'Courier-Oblique',
-//     bolditalics: 'Courier-BoldOblique'
-//   },
-//   Helvetica: {
-//     normal: 'Helvetica',
-//     bold: 'Helvetica-Bold',
-//     italics: 'Helvetica-Oblique',
-//     bolditalics: 'Helvetica-BoldOblique'
-//   }
-// }
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const el = document.querySelector("#submitButton");
