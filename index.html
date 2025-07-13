@@ -10,6 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <script>
+      function showOtherPayPeriod() {
+        if(document.getElementById("payPeriodLength").value == "0"){
+        document.getElementById("customPayPeriod").removeAttribute("style");
+        }
+        else{
+          document.getElementById("customPayPeriod").style.display = "none";
+        }
+      }
+
       function PrintDocument(documentContents){
         //pdfMake.addVirtualFileSystem(fonts);
         pdfMake.createPdf(documentContents).download();
@@ -20,9 +29,7 @@
   <body>
     <h1>Benefits Boosting!</h1>
     <p>
-      This is a calculator that will evaluate how much you could be saving with
-      Benefits Boosting!
-      <p>Please provide the following information:</p>
+      Please provide the following information:
     </p>
     <div class="label">Name: <input type="text" id="inputCustName" /></div>
     <div class="label">
@@ -34,20 +41,21 @@
     <div class="label" style="display: table">
       <div style="display: table-cell">Period Length:</div>
       <div class="custom-select" style="display: table-cell">
-        <select id="payPeriodLength">
+        <select id="payPeriodLength" onChange="showOtherPayPeriod();">
           <option>Select One</option>
           <option value="52">Weekly</option>
           <option value="26">Bi-Weekly</option>
           <option value="24">Semi-Monthly</option>
           <option value="1">Yearly</option>
           <!-- Add code for other text input to ask how often paid a year -->
-          <option value="0" onselect="showOtherPayPeriod()">Other</option>
+          <option value="0" onChange="showOtherPayPeriod();">Other</option>
         </select>
       </div>
+      <div class="label" style="display: none" id="customPayPeriod">
+        Other Pay Period: <input type="text" id="inputCustomPayPeriod" />
+      </div>
     </div>
-    <p style="display: none" id="customPayPeriod">
-      <input type="text" id="inputCustomPayPeriod" />
-    </p>
+    
     <!--Update State to either a DDLB or only from file input, don't need custom state filing-->
     <div class="label" style="display: table">
       <div style="display: table-cell">State:</div>

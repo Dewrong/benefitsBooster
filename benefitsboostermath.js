@@ -23,7 +23,7 @@ function SubmitForm() {
   var customerName = document.getElementById("inputCustName").value;
   var custState = document.getElementById("selectCustState").value;
   var custDependents = document.getElementById("inputCustDependents").value;
-debugger
+
   //need taxable income before finding tax rates
   var taxableIncome = parseInt(totalPay) - (parseInt(deductions) + (2000 * parseInt(custDependents)));
   
@@ -132,11 +132,11 @@ debugger
             ['FICA Taxes',{text:`$${(ficaTaxesTotalOwed/payPeriod).toFixed(2)}`, style:{alignment: 'right'}},{text:`$${(boostedFicaTaxesTotalOwed/payPeriod).toFixed(2)}`, style:{alignment: 'right'}}],
             ['Pay (Net of taxes)',{text:`$${(parseFloat(taxableIncome/payPeriod) - taxesTotal/payPeriod).toFixed(2)}`, style:{alignment: 'right'}},{text:`$${((benefitedTaxableIncome/payPeriod)-(boostedTotalTaxes/payPeriod)).toFixed(2)}`, style:{alignment: 'right'}}],
             ['Plan Distribution',{text:`$0.00`, style:{alignment: 'right'}},{text:`$${parseFloat(boostedPlanDistribution).toFixed(2)}`, style:{alignment: 'right'}}],
-            ['Net Pay',{text:`$${(grossPay/payPeriod).toFixed(2)}`, style:{alignment: 'right'}},{text:`$${((benefitedTaxableIncome/payPeriod) + boostedPlanDistribution).toFixed(2)}`, style:{alignment: 'right'}}]
+            ['Net Pay',{text:`$${(grossPay/payPeriod).toFixed(2)}`, style:{alignment: 'right'}},{text:`$${(((benefitedTaxableIncome/payPeriod)-(boostedTotalTaxes/payPeriod)) + boostedPlanDistribution).toFixed(2)}`, style:{alignment: 'right'}}]
           ]
         }      
       },
-      `New Employee Benefit Allotment: $${(((benefitedTaxableIncome/payPeriod) + boostedPlanDistribution) - (grossPay/payPeriod)).toFixed(2)}`
+      `New Employee Benefit Allotment: $${(((benefitedTaxableIncome/payPeriod -(boostedTotalTaxes/payPeriod)) + boostedPlanDistribution) - (grossPay/payPeriod)).toFixed(2)}`
     ],
     styles: {
       header: {
@@ -281,7 +281,7 @@ function periodCheck(value) {
 }
 
 function showOtherPayPeriod() {
-  document.getElementById("customPayPeriod").removeProperty("style");
+  document.getElementById("customPayPeriod").removeAttribute("style");
 }
 
 function hideOtherPayPeriod() {
