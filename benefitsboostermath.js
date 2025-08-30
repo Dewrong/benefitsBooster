@@ -9,52 +9,62 @@ This work is completed by James Burdine.
 document.addEventListener("DOMContentLoaded", (event) => {
   const el = document.querySelector("#submitButton");
   if (el) {
-    el.addEventListener("click", (event) => SubmitForm());
+    el.addEventListener("click", (event) => SubmitForm("B"));
+  }
+  const csv = document.querySelector("#ReadFromFileButton");
+  if(csv){
+    csv.addEventListener("click", (event) => VerifyCSV());
   }
 });
 
-function SubmitForm() {
-  if(document.getElementById("selectCustFileStatus")?.value != ""){
-    var marriageStatus = document.getElementById("selectCustFileStatus").value
-  }
-  else{
-    alert("Please choose a Marriage Filing Status.")
-    return;
-  }
-  //make Pay Period a DDLB so there's no discrepancy, add other if semi-monthly is fucky
-  var payPeriod = periodCheck(document.getElementById("payPeriodLength").value);
-  if(payPeriod == 0){
-    alert("Please input a pay period.");
-    return;
-  }
-  if(document.getElementById("inputCustPayPerPeriod")?.value != ""){
-    var payPerPeriod = document.getElementById("inputCustPayPerPeriod").value
-  }
-  else{
-    alert("Please input the pay.")
-    return;
-  }
-  var deductions = "0";
-  if(document.getElementById("selectCustDeductions")?.value != "other" && document.getElementById("selectCustDeductions")?.value != ""){
-    deductions = document.getElementById("selectCustDeductions").value;
-  }
-  else if(document.getElementById("selectCustDeductions")?.value == "other"){
-    deductions = document.getElementById("inputCustDeductions").value;
-  }
-  else{
-    deductions = "0";
-  }
-  var totalPay = payPeriod * payPerPeriod;
-  var customerName = document.getElementById("inputCustName").value;  
-  if(document.getElementById("selectCustState")?.value != ""){
-    var custState = document.getElementById("selectCustState").value
-  }
-  else{
-    alert("Please choose a State.")
-    return;
-  }
-  var custDependents = document.getElementById("inputCustDependents").value ? document.getElementById("inputCustDependents").value : "0";
 
+function SubmitForm(source) {
+  if(source == "B"){
+    if(document.getElementById("selectCustFileStatus").value != ""){
+      var marriageStatus = document.getElementById("selectCustFileStatus").value
+    }
+    else{
+      alert("Please choose a Marriage Filing Status.")
+      return;
+    }
+    //make Pay Period a DDLB so there's no discrepancy, add other if semi-monthly is fucky
+    if(document.getElementById("selectCustState")?.value == ""){
+      alert("Please input a pay period.");
+      return;
+    }
+    var payPeriod = periodCheck(document.getElementById("payPeriodLength").value);
+    if(payPeriod == 0){
+      alert("Please input a pay period.");
+      return;
+    }
+    if(document.getElementById("inputCustPayPerPeriod")?.value != ""){
+      var payPerPeriod = document.getElementById("inputCustPayPerPeriod").value
+    }
+    else{
+      alert("Please input the pay.")
+      return;
+    }
+    var deductions = "0";
+    if(document.getElementById("selectCustDeductions")?.value != "other" && document.getElementById("selectCustDeductions")?.value != ""){
+      deductions = document.getElementById("selectCustDeductions").value;
+    }
+    else if(document.getElementById("selectCustDeductions")?.value == "other"){
+      deductions = document.getElementById("inputCustDeductions").value;
+    }
+    else{
+      deductions = "0";
+    }
+    var totalPay = payPeriod * payPerPeriod;
+    var customerName = document.getElementById("inputCustName").value;  
+    if(document.getElementById("selectCustState")?.value != ""){
+      var custState = document.getElementById("selectCustState").value
+    }
+    else{
+      alert("Please choose a State.")
+      return;
+    }
+    var custDependents = document.getElementById("inputCustDependents").value ? document.getElementById("inputCustDependents").value : "0";
+  }
   //need taxable income before finding tax rates
   var taxableIncome = parseInt(totalPay) - (parseInt(deductions) + (2000 * parseInt(custDependents)));
   
@@ -311,6 +321,9 @@ function periodCheck(value) {
   if (value == 0) {
     value = document.getElementById("inputCustomPayPeriod").value;
   }
+  else if(value == ""){
+    alert
+  }
   return value;
 }
 
@@ -513,4 +526,9 @@ function FederalTaxRateCalculate(taxableIncome, marriageStatus) {
       return combinedTaxes;
     }
   }
+}
+
+function VerifyCSV(){
+  //Use Papa csv to read in contents and parse. Then, loop through a copy of SubmitForm
+
 }
