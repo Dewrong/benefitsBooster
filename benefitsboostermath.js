@@ -20,23 +20,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 function SubmitForm(source) {
   if(source == "B"){
-    if(document.getElementById("selectCustFileStatus").selectedIndex.value != ""){
-      var marriageStatus = document.getElementById("selectCustFileStatus").value
+    //Filing Status, should be catching
+    if(document.getElementById("selectCustFileStatus").value != ""){
+      var marriageStatus = document.getElementById("selectCustFileStatus").value;
     }
-    else{
+    else if (document.getElementById("selectCustFileStatus").value == ""){
       alert("Please choose a Marriage Filing Status.")
       return;
     }
     //make Pay Period a DDLB so there's no discrepancy, add other if semi-monthly is fucky
-    if(document.getElementById("payPeriodLength")?.value == ""){
-      alert("Please input a pay period.");
-      return;
-    }
     var payPeriod = periodCheck(document.getElementById("payPeriodLength").value);
-    if(payPeriod == 0){
-      alert("Please input a pay period.");
-      return;
-    }
+    //Pay per check
     if(document.getElementById("inputCustPayPerPeriod").value != ""){
       var payPerPeriod = document.getElementById("inputCustPayPerPeriod").value
     }
@@ -45,7 +39,7 @@ function SubmitForm(source) {
       return;
     }
     var deductions = "0";
-    if(document.getElementById("selectCustDeductions")?.value != "other" && document.getElementById("selectCustDeductions")?.value != ""){
+    if(document.getElementById("selectCustDeductions").value != "other" && document.getElementById("selectCustDeductions").value != ""){
       deductions = document.getElementById("selectCustDeductions").value;
     }
     else if(document.getElementById("selectCustDeductions")?.value == "other"){
@@ -318,11 +312,12 @@ function StateCalculate(taxableIncome, custState, marriageStatus) {
 }
 
 function periodCheck(value) {
-  if (value == 0) {
+  if (value == 0 && document.getElementById("inputCustomPayPeriod").value != "") {
     value = document.getElementById("inputCustomPayPeriod").value;
   }
-  else if(value == ""){
-    alert
+  else{
+    alert("Please input a pay period.");
+    return;
   }
   return value;
 }
