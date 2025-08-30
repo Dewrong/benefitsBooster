@@ -48,3 +48,8 @@ button{
     color: white;
     background-color: red;
 }
+
+input[type="radio"]{
+  height:1.3pc;
+   width:1.3pc;
+}

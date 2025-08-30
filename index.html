@@ -19,6 +19,15 @@
         }
       }
 
+      function showOtherDeductions() {
+        if(document.getElementById("selectCustDeductions").value == "other"){
+        document.getElementById("customDeductions").removeAttribute("style");
+        }
+        else{
+          document.getElementById("customDeductions").style.display = "none";
+        }
+      }
+
       function PrintDocument(documentContents){
         //pdfMake.addVirtualFileSystem(fonts);
         pdfMake.createPdf(documentContents).download();
@@ -36,7 +45,20 @@
       Pay Per Period: <input type="text" id="inputCustPayPerPeriod" />
     </div>
     <div class="label">
-      Deductions: <input type="text" id="inputCustDeductions" />
+      Deductions: 
+      <select id="selectCustDeductions" onChange="showOtherDeductions();">
+        <option>Select One</option>
+        <option value="600">600</option>
+        <option value="900">900</option>
+        <option value="1300">1300</option>
+        <option value="1700">1700</option>
+        <!-- Add code for other text input to ask how often paid a year -->
+        <option value="other" onChange="showOtherDeductions();">Other</option>
+      </select>
+      <div class="label" style="display: none" id="customDeductions">
+        Other Deductions: <input type="text" id="inputCustDeductions" />
+      </div>
+      
     </div>
     <div class="label" style="display: table">
       <div style="display: table-cell">Period Length:</div>
@@ -86,6 +108,9 @@
     </div>
     <div class="label">
       Dependents: <input type="text" id="inputCustDependents" />
+    </div>
+    <div class="label">
+      Advanced Benefit: <input type="radio" id="advBenRadio10" name="advBenRadio" checked value="10"/> 10% <input type="radio" id="advBenRadio5" value="5" name="advBenRadio"/> 5%
     </div>
     <p>
       <button id="submitButton">
