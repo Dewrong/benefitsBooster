@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 function SubmitForm(source) {
   if(source == "B"){
-    if(document.getElementById("selectCustFileStatus").value != ""){
+    if(document.getElementById("selectCustFileStatus").selectedIndex.value != ""){
       var marriageStatus = document.getElementById("selectCustFileStatus").value
     }
     else{
@@ -28,7 +28,7 @@ function SubmitForm(source) {
       return;
     }
     //make Pay Period a DDLB so there's no discrepancy, add other if semi-monthly is fucky
-    if(document.getElementById("selectCustState")?.value == ""){
+    if(document.getElementById("payPeriodLength")?.value == ""){
       alert("Please input a pay period.");
       return;
     }
@@ -37,7 +37,7 @@ function SubmitForm(source) {
       alert("Please input a pay period.");
       return;
     }
-    if(document.getElementById("inputCustPayPerPeriod")?.value != ""){
+    if(document.getElementById("inputCustPayPerPeriod").value != ""){
       var payPerPeriod = document.getElementById("inputCustPayPerPeriod").value
     }
     else{
