@@ -312,10 +312,14 @@ function StateCalculate(taxableIncome, custState, marriageStatus) {
 }
 
 function periodCheck(value) {
+  debugger
   if (value == 0 && document.getElementById("inputCustomPayPeriod").value != "") {
     value = document.getElementById("inputCustomPayPeriod").value;
   }
-  else{
+  else if(value!= 0){
+    return value;
+  }
+  else{    
     alert("Please input a pay period.");
     return;
   }
